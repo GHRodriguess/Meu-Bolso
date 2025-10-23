@@ -80,6 +80,6 @@ Distribuído sob a Licença [Nome da Licença]. Veja o arquivo `LICENSE` para ma
 
 ## 📧 Contato
 
-Seu Nome/Nome de Usuário - [gabri.henri20088@email.com]
+E-mail - [gabri.henri20088@email.com]
 
 Link do Projeto: [Meu Bolso](https://github.com/GHRodriguess/Meu-Bolso)
