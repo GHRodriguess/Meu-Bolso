@@ -46,9 +46,11 @@ INSTALLED_APPS = [
     #thirdparty
     'rest_framework',
     'corsheaders',
+    'djmoney',
     #myapps
     'a_email',
-    'a_user'
+    'a_user',
+    'a_core'
 ]
 
 MIDDLEWARE = [
@@ -154,3 +156,6 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'URL_FORMAT_OVERRIDE': None,
 }
+
+CURRENCIES = ('BRL',)
+DEFAULT_CURRENCY = 'BRL'
