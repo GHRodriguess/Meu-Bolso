@@ -1,9 +1,12 @@
 from django.db import models
 from djmoney.models.fields import MoneyField
 from datetime import date
+from django.conf import settings
 from dateutil.relativedelta import relativedelta 
 
+
 class Conta(models.Model):
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='contas', null=True, blank=True)
     nome = models.CharField(max_length=100)
     saldo_atual = MoneyField(max_digits=12, decimal_places=2, default_currency='BRL', default=0)
     saldo = MoneyField(max_digits=12, decimal_places=2, default_currency='BRL', default=0)
@@ -12,6 +15,7 @@ class Conta(models.Model):
         return self.nome
     
 class Categoria(models.Model):
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='categorias', null=True, blank=True)
     nome = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
@@ -23,6 +27,7 @@ class Transacao(models.Model):
         ('saida', 'Saída'),
     ]
 
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='transacoes', null=True, blank=True)
     conta = models.ForeignKey('Conta', on_delete=models.CASCADE, related_name='transacoes')
     tipo = models.CharField(max_length=10, choices=TIPO_CHOICES)
     valor = MoneyField(max_digits=12, decimal_places=2, default_currency='BRL')
@@ -84,7 +89,8 @@ class Recorrente(models.Model):
         ('mensal', 'Mensal'),
         ('anual', 'Anual'),
     ]
-
+    
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='recorrentes', null=True, blank=True)
     conta = models.ForeignKey('Conta', on_delete=models.CASCADE, related_name='recorrentes')
     categoria = models.ForeignKey('Categoria', on_delete=models.SET_NULL, null=True, blank=True, related_name='recorrentes')
     nome = models.CharField(max_length=100)
